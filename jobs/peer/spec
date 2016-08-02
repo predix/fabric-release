@@ -3,10 +3,15 @@ name: peer
 templates:
   peer_ctl.erb: bin/peer_ctl
   core.yaml.erb: config/core.yaml
+  config.yaml.erb: config/config.yaml
 
 packages:
   - peer
   - utils
+  - golang
+  - cgolibs
+  - docker
+  - git
 
 properties:
   peer.core.logging_level:

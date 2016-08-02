@@ -1,0 +1,5 @@
+---
+name: git
+
+files:
+  - git/git.tgz

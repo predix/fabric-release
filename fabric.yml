@@ -17,6 +17,8 @@ jobs:
   templates:
   - name: peer
     release: fabric-release
+  - name: docker
+    release: fabric-release
   update:
     max_in_flight: 1
     serial: true

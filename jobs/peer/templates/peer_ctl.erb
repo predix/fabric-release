@@ -5,7 +5,7 @@ LOG_DIR=/var/vcap/sys/log/peer
 CONF_DIR=/var/vcap/jobs/peer/config
 PIDFILE=$RUN_DIR/peer.pid
 
-source /var/vcap/packages/common_utils/pid_utils.sh
+source /var/vcap/packages/utils/pid_utils.sh
 
 case $1 in
 
@@ -23,9 +23,16 @@ case $1 in
     echo $$ > /var/vcap/sys/run/peer/peer.pid
 
     export PEER_CFG_PATH=${CONF_DIR}
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/var/vcap/packages/cgolibs
 
-    exec chpst -u vcap:vcap /var/vcap/packages/peer/bin/peer node start
+    export GOROOT=/var/vcap/packages/golang
+    export GOPATH=/var/vcap/packages/gopath
+    mkdir -p $GOPATH
+    export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
 
+    pushd /var/vcap/jobs/peer/config
+      exec /var/vcap/packages/peer/bin/peer node start
+    popd
     ;;
 
   stop)
