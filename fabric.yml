@@ -1,0 +1,51 @@
+---
+compilation:
+  cloud_properties: {}
+  network: peer1
+  reuse_compilation_vms: true
+  workers: 2
+director_uuid: 25b988f9-206d-4e0f-a9e8-851e1ecbbb11
+jobs:
+- instances: 1
+  name: peer_z1
+  networks:
+  - name: peer1
+    static_ips:
+    - 10.244.8.2
+  persistent_disk: 1024
+  resource_pool: peer_z1
+  templates:
+  - name: peer
+    release: fabric-release
+  update:
+    max_in_flight: 1
+    serial: true
+name: hyperledger-fabric
+networks:
+- name: peer1
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.8.0/24
+    reserved:
+    - 10.244.8.1
+    static:
+    - 10.244.8.2
+  type: manual
+properties:
+  peer: null
+releases:
+- name: fabric-release
+  version: latest
+resource_pools:
+- cloud_properties: {}
+  name: peer_z1
+  network: peer1
+  stemcell:
+    name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+    version: latest
+update:
+  canaries: 1
+  canary_watch_time: 5000-120000
+  max_in_flight: 1
+  serial: false
+  update_watch_time: 5000-120000

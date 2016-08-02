@@ -1,0 +1,27 @@
+---
+name: peer
+templates:
+  peer_ctl.erb: bin/peer_ctl
+  core.yaml.erb: config/core.yaml
+
+packages:
+  - peer
+  - utils
+
+properties:
+  peer.core.logging_level:
+    description: "Logging level"
+    default: "DEBUG"
+
+  peer.core.discovery.auto_detect:
+    description: "Should peer perform auto discovery of other peers"
+    default: true
+
+  peer.core.discovery.root_node:
+    description: "Root node of peer discovery"
+    default: nil
+
+  peer.core.consensus.plugin:
+    description: "The consensus algorithm to use"
+    default: "noops"
+

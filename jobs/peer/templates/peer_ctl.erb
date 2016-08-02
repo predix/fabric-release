@@ -1,0 +1,41 @@
+#!/bin/bash -e
+
+RUN_DIR=/var/vcap/sys/run/peer
+LOG_DIR=/var/vcap/sys/log/peer
+CONF_DIR=/var/vcap/jobs/peer/config
+PIDFILE=$RUN_DIR/peer.pid
+
+source /var/vcap/packages/common_utils/pid_utils.sh
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE "peer"
+
+    mkdir -p $RUN_DIR
+    mkdir -p $LOG_DIR
+
+    chown -R vcap:vcap $RUN_DIR
+    chown -R vcap:vcap $LOG_DIR
+
+    tee_output_to_sys_log "${LOG_DIR}"
+
+    echo $$ > /var/vcap/sys/run/peer/peer.pid
+
+    export PEER_CFG_PATH=${CONF_DIR}
+
+    exec chpst -u vcap:vcap /var/vcap/packages/peer/bin/peer node start
+
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: peer_ctl {start|stop}"
+
+    ;;
+
+esac

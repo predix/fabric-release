@@ -1,0 +1,26 @@
+# abort script on any command that exits with a non zero value
+set -e -x
+
+mkdir -p ${BOSH_INSTALL_TARGET}/src
+mkdir -p ${BOSH_INSTALL_TARGET}/bin
+#cp -a . ${BOSH_INSTALL_TARGET}/src
+echo "Copying peer binary..."
+
+cp peer/peer ${BOSH_INSTALL_TARGET}/bin
+chmod 755 ${BOSH_INSTALL_TARGET}/bin/peer
+
+#pushd ${BOSH_INSTALL_TARGET}/src/github.com/hyperledger/fabric
+  #echo $PWD
+  #ls -l
+  #./images/base/scripts/common/init.sh
+  #./images/base/scripts/docker/init.sh
+  #./images/base/scripts/common/setup.sh
+#
+  #make peer
+  #cp ./build/bin/peer ${BOSH_INSTALL_TARGET}/bin
+#
+  #export PATH=${BOSH_INSTALL_TARGET}/bin:$PATH
+#popd
+#
+## clean up source artifacts
+#rm -rf ${BOSH_INSTALL_TARGET}/src ${BOSH_INSTALL_TARGET}/pkg

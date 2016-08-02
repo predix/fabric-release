@@ -1,0 +1,5 @@
+check process peer
+  with pidfile /var/vcap/sys/run/peer/peer.pid
+  start program "/var/vcap/jobs/peer/bin/peer_ctl start"
+  stop program "/var/vcap/jobs/peer/bin/peer_ctl stop"
+  group vcap
