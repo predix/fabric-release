@@ -1,5 +1,6 @@
 .dev_builds
 blobs
 dev_releases
-**/private.yml
+config/private.yml
+config/dev.yml
 .blobs
