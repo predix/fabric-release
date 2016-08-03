@@ -28,7 +28,7 @@ case $1 in
     export GOROOT=/var/vcap/packages/golang
     export GOPATH=/var/vcap/packages/gopath
     mkdir -p $GOPATH
-    export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
+    export PATH=$PATH:$GOPATH/bin:$GOROOT/bin:/var/vcap/packages/git/usr/bin
 
     pushd /var/vcap/jobs/peer/config
       exec /var/vcap/packages/peer/bin/peer node start

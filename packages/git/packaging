@@ -1,5 +1,5 @@
 #!/bin/bash
 set -e -x
 
-mkdir -p ${BOSH_INSTALL_TARGET}/rootfs
-tar zxf git/git.tgz -C ${BOSH_INSTALL_TARGET}/rootfs
+mkdir -p ${BOSH_INSTALL_TARGET}
+tar zxf git/git.tgz -C ${BOSH_INSTALL_TARGET}

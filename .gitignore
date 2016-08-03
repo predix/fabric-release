@@ -2,3 +2,4 @@
 blobs
 dev_releases
 **/private.yml
+.blobs
