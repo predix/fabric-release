@@ -6,12 +6,10 @@ compilation:
   workers: 2
 director_uuid: 28539132-6d43-4e1b-bf40-f2ce032ee9f8
 jobs:
-- instances: 1
+- instances: 3
   name: peer_z1
   networks:
   - name: peer1
-    static_ips:
-    - 10.244.8.2
   persistent_disk: 1024
   resource_pool: peer_z1
   templates:
@@ -30,11 +28,12 @@ networks:
     range: 10.244.8.0/24
     reserved:
     - 10.244.8.1
-    static:
-    - 10.244.8.2
   type: manual
 properties:
-  peer: null
+  peer:
+    core:
+      consensus:
+        plugin: pbft
 releases:
 - name: fabric-release
   version: latest

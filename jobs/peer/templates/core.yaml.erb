@@ -94,7 +94,7 @@ peer:
     # The Address this Peer will listen on
     listenAddress: 0.0.0.0:30303
     # The Address this Peer will bind to for providing services
-    address: 0.0.0.0:30303
+    address: <%= spec.address %>:30303
     # Whether the Peer should programmatically determine the address to bind to.
     # This case is useful for docker containers.
     addressAutoDetect: false
@@ -134,7 +134,7 @@ peer:
         consensus:
             # Consensus plugin to use. The value is the name of the plugin, e.g. pbft, noops ( this value is case-insensitive)
             # if the given value is not recognized, we will default to noops
-            plugin: noops
+            plugin: <%= p("peer.core.consensus.plugin") %>
 
             # total number of consensus messages which will be buffered per connection before delivery is rejected
             buffersize: 1000

@@ -3,8 +3,11 @@ set -e -x
 
 mkdir -p ${BOSH_INSTALL_TARGET}/src
 mkdir -p ${BOSH_INSTALL_TARGET}/bin
-#cp -a . ${BOSH_INSTALL_TARGET}/src
+
 echo "Copying peer binary..."
 
 cp peer/peer ${BOSH_INSTALL_TARGET}/bin
 chmod 755 ${BOSH_INSTALL_TARGET}/bin/peer
+
+echo "Copying the fabric/peer source"
+cp peer/fabric-src.tgz ${BOSH_INSTALL_TARGET}/src

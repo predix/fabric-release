@@ -3,3 +3,4 @@ name: peer
 
 files:
   - peer/peer
+  - peer/fabric-src.tgz

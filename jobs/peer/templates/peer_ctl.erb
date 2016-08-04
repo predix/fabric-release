@@ -29,6 +29,15 @@ case $1 in
     export GOPATH=/var/vcap/packages/gopath
     export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
 
+    <% instance_index = spec.index %>
+
+    export CORE_PEER_ID="vp<%= instance_index %>"
+    export CORE_VM_ENDPOINT="unix:///var/run/docker.sock"
+
+    <% if instance_index != 0 %>
+    export CORE_PEER_DISCOVERY_ROOTNODE="<%= link("peers").instances[0].address %>:30303"
+    <% end %>
+
     pushd /var/vcap/jobs/peer/config
       exec /var/vcap/packages/peer/bin/peer node start
     popd

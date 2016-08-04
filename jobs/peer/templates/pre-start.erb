@@ -8,11 +8,10 @@ apt-get -y install git
 
 echo "Installed git successfully"
 
-echo "Getting hyperledger/fabric code"
+echo "Copying hyperledger/fabric code to GOPATH"
 export GOROOT=/var/vcap/packages/golang
 export GOPATH=/var/vcap/packages/gopath
 mkdir -p $GOPATH
-export PATH=$PATH:$GOPATH/bin:$GOROOT/bin
-go get -d github.com/hyperledger/fabric/peer
+tar zxvf /var/vcap/packages/peer/src/fabric-src.tgz -C ${GOPATH}
 
-echo "Done getting hyperledger/fabric code"
+echo "Done copying hyperledger/fabric code to GOPATH"

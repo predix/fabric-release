@@ -13,6 +13,14 @@ packages:
   - cgolibs
   - docker
 
+consumes:
+  - name: peers
+    type: fabric_peers
+
+provides:
+  - name: peers
+    type: fabric_peers
+
 properties:
   peer.core.logging_level:
     description: "Logging level"
