@@ -89,7 +89,7 @@ peer:
     # The networkId allows for logical seperation of networks
     # networkId: dev
     # networkId: test
-    networkId: dev
+    networkId: <%= p("peer.network.id") %>
 
     # The Address this Peer will listen on
     listenAddress: 0.0.0.0:30303

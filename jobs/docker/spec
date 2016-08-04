@@ -12,6 +12,7 @@ templates:
   config/docker.cacert.erb: config/docker.cacert
   config/docker.cert.erb: config/docker.cert
   config/docker.key.erb: config/docker.key
+  bin/post-deploy.erb: bin/post-deploy
 
 properties:
   docker.tcp_address:

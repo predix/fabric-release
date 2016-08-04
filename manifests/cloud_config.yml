@@ -1,0 +1,38 @@
+---
+networks:
+- name: compilation
+  type: manual
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.10.0/24
+    reserved:
+    - 10.244.10.1
+    az: z1
+- name: peer
+  type: manual
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.8.0/24
+    reserved:
+    - 10.244.8.1
+    az: z1
+  - cloud_properties: {}
+    range: 10.244.9.0/24
+    reserved:
+    - 10.244.9.1
+    az: z2
+azs:
+- name: z1
+  cloud_properties: {}
+- name: z2
+  cloud_properties: {}
+vm_types:
+- name: small
+  cloud_properties: {}
+compilation:
+  cloud_properties: {}
+  network: compilation
+  az: z1
+  vm_type: small
+  reuse_compilation_vms: true
+  workers: 2
