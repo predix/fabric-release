@@ -23,10 +23,6 @@ docker/docker-1.11.0.tgz:
   object_id: 0378a905-4bbf-401c-9486-16782806d8c1
   sha: 242b6a3e6def6719f5002a4d3d5b35e587036c4e
   size: 20520756
-git/git.tgz:
-  object_id: 18a40165-a08c-4a8d-848d-6f51cdce5495
-  sha: 27aefcdd71f71ac087920d898bf33068c062bf2e
-  size: 13913637
 golang/go1.6.3.linux-amd64.tar.gz:
   object_id: 51aa9acc-a049-426f-90fc-a42e6231bd74
   sha: 5e916ba4dd8c2fc43beafca4c08b334c4d0686f3

@@ -4,6 +4,7 @@ templates:
   peer_ctl.erb: bin/peer_ctl
   core.yaml.erb: config/core.yaml
   config.yaml.erb: config/config.yaml
+  pre-start.erb: bin/pre-start
 
 packages:
   - peer
@@ -11,7 +12,6 @@ packages:
   - golang
   - cgolibs
   - docker
-  - git
 
 properties:
   peer.core.logging_level:
