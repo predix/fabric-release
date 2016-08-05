@@ -32,10 +32,10 @@ case $1 in
     <% instance_index = spec.index %>
     <% instance_az = spec.az %>
 
-    export CORE_PEER_ID="vp<%= instance_az %><%= instance_index %>"
+    export CORE_PEER_ID="vp<%= instance_index %>"
     export CORE_VM_ENDPOINT="unix:///var/run/docker.sock"
 
-    <% if !(instance_index == 0 && instance_az == 'z1') %>
+    <% if instance_index != 0 %>
     export CORE_PEER_DISCOVERY_ROOTNODE="<%= link("peers").instances[0].address %>:30303"
     <% end %>
 

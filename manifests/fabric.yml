@@ -32,4 +32,4 @@ properties:
   peer:
     core:
       consensus:
-        plugin: noops
+        plugin: pbft

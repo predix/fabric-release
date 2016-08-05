@@ -21,6 +21,19 @@ networks:
     reserved:
     - 10.244.9.1
     az: z2
+- name: ethpeer
+  type: manual
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.11.0/24
+    reserved:
+    - 10.244.11.1
+    az: z1
+  - cloud_properties: {}
+    range: 10.244.12.0/24
+    reserved:
+    - 10.244.12.1
+    az: z2
 azs:
 - name: z1
   cloud_properties: {}
