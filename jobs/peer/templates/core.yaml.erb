@@ -134,7 +134,7 @@ peer:
         consensus:
             # Consensus plugin to use. The value is the name of the plugin, e.g. pbft, noops ( this value is case-insensitive)
             # if the given value is not recognized, we will default to noops
-            plugin: <%= p("peer.core.consensus.plugin") %>
+            plugin: <%= p("peer.consensus.plugin") %>
 
             # total number of consensus messages which will be buffered per connection before delivery is rejected
             buffersize: 1000

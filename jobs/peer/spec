@@ -34,7 +34,7 @@ properties:
     description: "Root node of peer discovery"
     default: nil
 
-  peer.core.consensus.plugin:
+  peer.consensus.plugin:
     description: "The consensus algorithm to use"
     default: "noops"
 
