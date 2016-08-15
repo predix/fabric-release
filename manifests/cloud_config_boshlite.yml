@@ -34,6 +34,45 @@ networks:
     reserved:
     - 10.244.12.1
     az: z2
+- name: peer1
+  type: manual
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.13.0/24
+    reserved:
+    - 10.244.13.1
+    az: z1
+  - cloud_properties: {}
+    range: 10.244.14.0/24
+    reserved:
+    - 10.244.14.1
+    az: z2
+- name: peer2
+  type: manual
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.15.0/24
+    reserved:
+    - 10.244.15.1
+    az: z1
+  - cloud_properties: {}
+    range: 10.244.16.0/24
+    reserved:
+    - 10.244.16.1
+    az: z2
+- name: peer3
+  type: manual
+  subnets:
+  - cloud_properties: {}
+    range: 10.244.17.0/24
+    reserved:
+    - 10.244.17.1
+    az: z1
+  - cloud_properties: {}
+    range: 10.244.18.0/24
+    reserved:
+    - 10.244.18.1
+    az: z2
 azs:
 - name: z1
   cloud_properties: {}
