@@ -64,7 +64,7 @@ logging:
     # options.
     peer: warning
 
-    node:      info
+    node:      <%= p("peer.core.logging_level") %>
     network:   warning
     chaincode: warning
     version: warning
@@ -164,6 +164,21 @@ peer:
         serverhostoverride:
 
     # PKI member services properties
+    <% if p("peer.security.enabled") == true %>
+    pki:
+        eca:
+            paddr: <%= link("membersrvc").instances[0].address %>:50051
+        tca:
+            paddr: <%= link("membersrvc").instances[0].address %>:50051
+        tlsca:
+            paddr: <%= link("membersrvc").instances[0].address %>:50051
+        tls:
+            enabled: false
+            rootcert:
+                file: tlsca.cert
+            # The server name use to verify the hostname returned by TLS handshake
+            serverhostoverride:
+    <% else %>
     pki:
         eca:
             paddr: localhost:50051
@@ -177,6 +192,8 @@ peer:
                 file: tlsca.cert
             # The server name use to verify the hostname returned by TLS handshake
             serverhostoverride:
+    <% end %>
+    
 
     # Peer discovery settings.  Controls how this peer discovers other peers
     discovery:
@@ -384,13 +401,15 @@ security:
     # Enable security will force every entity on the network to enroll with obc-ca
     # and maintain a valid set of certificates in order to communicate with
     # other peers
-    enabled: false
+    enabled: <%= p("peer.security.enabled") %>
     # To enroll NVP or VP with membersrvc. These parameters are for 1 time use.
     # They will not be valid on subsequent times without un-enroll first.
     # The values come from off-line registration with obc-ca. For testing, make
     # sure the values are in membersrvc/membersrvc.yaml file eca.users
-    enrollID: vp
-    enrollSecret: f3489fy98ghf
+    <% instance_index = spec.index %>
+    <% validator = p("membersrvc.validators")[instance_index] %>
+    enrollID: <%= validator["name"] %>
+    enrollSecret: <%= validator["secret"] %>
     # To enable privacy of transactions (requires security to be enabled). This
     # encrypts the transaction content during transit and at rest. The state
     # data is also encrypted

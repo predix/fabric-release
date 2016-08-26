@@ -1,0 +1,41 @@
+#!/bin/bash -e
+
+RUN_DIR=/var/vcap/sys/run/member_service
+LOG_DIR=/var/vcap/sys/log/member_service
+PIDFILE=$RUN_DIR/member_service.pid
+
+source /var/vcap/packages/utils/pid_utils.sh
+
+case $1 in
+
+  start)
+    pid_guard $PIDFILE "member_service"
+
+    mkdir -p $RUN_DIR
+    mkdir -p $LOG_DIR
+
+    chown -R vcap:vcap $RUN_DIR
+    chown -R vcap:vcap $LOG_DIR
+
+    tee_output_to_sys_log "${LOG_DIR}"
+
+    echo $$ > /var/vcap/sys/run/member_service/member_service.pid
+
+    export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/var/vcap/packages/cgolibs
+
+    pushd /var/vcap/jobs/member_service/config
+        exec /var/vcap/packages/member_service/bin/membersrvc
+    popd
+    ;;
+
+  stop)
+    kill_and_wait $PIDFILE
+
+    ;;
+
+  *)
+    echo "Usage: member_service_ctl {start|stop}"
+
+    ;;
+
+esac

@@ -1,0 +1,5 @@
+check process member_service
+  with pidfile /var/vcap/sys/run/member_service/member_service.pid
+  start program "/var/vcap/jobs/member_service/bin/member_service_ctl start"
+  stop program "/var/vcap/jobs/member_service/bin/member_service_ctl stop"
+  group vcap

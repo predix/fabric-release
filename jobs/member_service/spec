@@ -1,0 +1,27 @@
+---
+name: member_service
+
+templates:
+  member_service_ctl.erb: bin/member_service_ctl
+  membersrvc.yaml.erb: config/membersrvc.yaml
+
+packages:
+  - member_service
+  - cgolibs
+  - utils
+
+provides:
+  - name: membersrvc
+    type: member_service
+
+properties:
+  membersrvc.validators:
+    description: "Validators to be configured in ECA"
+  membersrvc.non_validators:
+    description: "Non Validating peers to be configured in ECA"
+  membersrvc.clients:
+    description: "Clients to be configured in ECA"
+  membersrvc.auditors:
+    description: "Auditors to be configured in ECA"
+  membersrvc.affiliations:
+    description: "Affiliations for pre key tree"

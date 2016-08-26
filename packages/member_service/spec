@@ -1,0 +1,5 @@
+---
+name: member_service
+
+files:
+  - member_service/membersrvc

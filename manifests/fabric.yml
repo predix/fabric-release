@@ -15,6 +15,17 @@ update:
   serial: false
   update_watch_time: 5000-120000
 jobs:
+- instances: 1
+  azs: [z1, z2]
+  name: membersrvc
+  networks:
+  - name: peer
+  persistent_disk: 1024
+  vm_type: small
+  stemcell: default
+  templates:
+  - name: member_service
+    release: fabric-release 
 - instances: 3
   azs: [z1, z2]
   name: peer
@@ -32,3 +43,70 @@ properties:
   peer:
     consensus:
       plugin: pbft
+    security:
+      enabled: true
+  membersrvc:
+    affiliations:
+      banks_and_institutions:
+        banks:
+            - bank_a
+            - bank_b
+            - bank_c
+        institutions:
+            - institution_a
+    clients:
+    - name: admin
+      secret: Xurw3yU9zI0l
+      affiliation: institution_a 00001
+      affiliation_role:
+      metadata: '''{"registrar":{"roles":["client","peer","validator","auditor"],"delegateRoles":["client"]}}'''
+    - name: WebAppAdmin
+      secret: DJY27pEnl16d
+      affiliation: institution_a 00002
+      affiliation_role:
+      metadata: '''{"registrar":{"roles":["client"]}}'''
+    - name: lukas
+      secret: NPKYL39uKbkj
+      affiliation: bank_a
+      affiliation_role: 00001
+      metadata:
+    - name: system_chaincode_invoker
+      secret: DRJ20pEql15a
+      affiliation: institution_a
+      affiliation_role: 00002
+      metadata:
+    - name: diego
+      secret: DRJ23pEQl16a
+      affiliation: institution_a
+      affiliation_role: 00003
+      metadata:
+    - name: binhn
+      secret: 7avZQLwcUe9q
+      affiliation: institution_a
+      affiliation_role: 00005
+      metadata:
+    - name: jim
+      secret: 6avZQLwcUe9b
+      affiliation: bank_a
+      affiliation_role: 00004
+      metadata:
+    validators:
+    - name: vp0
+      secret: f3489fy98ghf
+    - name: vp1
+      secret: MwYpmSRjupbT
+    - name: vp2
+      secret: 5wgHK9qqYaPy
+    - name: vp3
+      secret: vQelbRvja7cJ
+    non_validators:
+    - name: nvp0
+      secret: iywrPBDEPl0K
+      affiliation: bank_a
+      affiliation_role: 00006
+    - name: nvp1
+      secret: DcYXuRSocuqd
+      affiliation: institution_a
+      affiliation_role: 00007
+    auditors:
+

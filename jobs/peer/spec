@@ -16,6 +16,8 @@ packages:
 consumes:
   - name: peers
     type: fabric_peers
+  - name: membersrvc
+    type: member_service
 
 provides:
   - name: peers
@@ -41,3 +43,11 @@ properties:
   peer.network.id:
     description: "Network ID of the block chain network"
     default: "dev"
+
+  peer.security.enabled:
+    description: "Is security enabled in block chain"
+    default: false
+
+  membersrvc.validators:
+    description: "Validators to be configured in ECA"
+
