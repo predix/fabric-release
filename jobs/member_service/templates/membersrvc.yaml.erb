@@ -52,13 +52,17 @@ eca:
         # This hierarchy is used to create the Pre-key tree, affiliations is the top of this hierarchy, 'banks_and_institutions' is used to create the key associated to auditors of both banks and
         # institutions, 'banks' is used to create a key associated to auditors of banks, 'bank_a' is used to create a key associated to auditors of bank_a, etc.
         affiliations:
-           banks_and_institutions:
-              banks:
-                  - bank_a
-                  - bank_b
-                  - bank_c
-              institutions:
-                  - institution_a
+          <% if_p("membersrvc.affiliations") do |affiliations| %>
+            <% affiliations.each do |fkey, fval| %>
+            <%= fkey %>:
+              <% fval.each do |skey, sval| %>
+                <%= skey %>:
+                <% sval.each do |v| %>
+                - <%= v %>
+                <% end %>
+              <% end %>
+            <% end %>
+          <% end %>
         users:
                 #
                 # The fields of each user are as follows:
@@ -83,21 +87,21 @@ eca:
                 #    The 'WebAppAdmin' user below can register clients only, but none of the users registered by this user can register other users.
                 #
                 # Clients
-                <% if_p("membersrvc.clients") do |clients|%>
+                <% if_p("membersrvc.clients") do |clients| %>
                   <% clients.each do |client| %>
                   <%= client["name"] %>: 1 <%= client["secret"] %> <%= client["affiliation"] %> <%= client["affiliation_role"] %> <%= client["metadata"] %>
                   <% end %>
                 <% end %>
 
                 # Non validators
-                <% if_p("membersrvc.non_validators") do |non_validators|%>
+                <% if_p("membersrvc.non_validators") do |non_validators| %>
                 <% non_validators.each do |non_validator| %>
                   <%= non_validator["name"] %>: 2 <%= non_validator["secret"] %> <%= non_validator["affiliation"] %> <%= non_validator["affiliation_role"] %>
                   <% end %>
                 <% end %>
 
                 # Validators
-                <% if_p("membersrvc.validators") do |validators|%>
+                <% if_p("membersrvc.validators") do |validators| %>
                 <% validators.each do |validator| %>
                   <%= validator["name"] %>: 4 <%= validator["secret"] %>
                   <% end %>
@@ -105,7 +109,7 @@ eca:
 
                 # Auditors
 
-                <% if_p("membersrvc.auditors") do |auditors|%>
+                <% if_p("membersrvc.auditors") do |auditors| %>
                 <% auditors.each do |auditor| %>
                   <%= auditor["name"] %>: 8 <%= auditor["secret"] %> <%= auditor["affiliation"] %> <%= auditor["affiliation_role"] %>
                   <% end %>
