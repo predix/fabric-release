@@ -35,3 +35,7 @@ peer/fabric-src.tgz:
   object_id: 26dee63d-9e8a-4523-9b5b-917096215d7e
   sha: 177be4fe8cf8a7c2c75fae3c5f545664cc25dfd4
   size: 69266741
+member_service/membersrvc:
+  object_id: aa50a525-1239-482a-922e-76db83517a83
+  sha: 6cedc2c8bac1e34e0d1f608f9542a704e279866f
+  size: 20295948
