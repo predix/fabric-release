@@ -45,6 +45,11 @@ properties:
       plugin: pbft
     security:
       enabled: true
+    core:
+      data_path: /var/vcap/data/hyperledger/production
+  docker:
+    store:
+      dir: /var/vcap/data/docker
   membersrvc:
     affiliations:
       banks_and_institutions:

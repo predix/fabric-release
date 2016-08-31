@@ -105,6 +105,9 @@ properties:
   docker.ulimit.nofile:
     description: "Maximum number of open files"
     default: 8192
+  docker.store.dir:
+    description: "Directory to store the Docker data files"
+    default: "/var/vcap/store/docker"
 
   env.http_proxy:
     description: "HTTP proxy that Docker should use"

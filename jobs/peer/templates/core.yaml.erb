@@ -229,7 +229,7 @@ peer:
         touchMaxNodes: 100
 
     # Path on the file system where peer will store data
-    fileSystemPath: /var/hyperledger/production
+    fileSystemPath: <%= p("peer.core.data_path") %>
 
 
     profile:
@@ -406,10 +406,15 @@ security:
     # They will not be valid on subsequent times without un-enroll first.
     # The values come from off-line registration with obc-ca. For testing, make
     # sure the values are in membersrvc/membersrvc.yaml file eca.users
+    <% if p("peer.security.enabled") == true %>
     <% instance_index = spec.index %>
     <% validator = p("membersrvc.validators")[instance_index] %>
     enrollID: <%= validator["name"] %>
     enrollSecret: <%= validator["secret"] %>
+    <% else %>
+    enrollID: vp0
+    enrollSecret: secret
+    <% end %>
     # To enable privacy of transactions (requires security to be enabled). This
     # encrypts the transaction content during transit and at rest. The state
     # data is also encrypted

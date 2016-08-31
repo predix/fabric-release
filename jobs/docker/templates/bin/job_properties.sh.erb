@@ -14,7 +14,7 @@ export DOCKER_LOG_DIR=${LOG_DIR}
 export DOCKER_PID_DIR=${RUN_DIR}
 
 # Directory to store the Docker data files
-export DOCKER_STORE_DIR=${STORE_DIR}
+export DOCKER_STORE_DIR=<%= p('docker.store.dir') %>
 
 # Directory to store the Docker temp files
 export DOCKER_TMP_DIR=${TMP_DIR}

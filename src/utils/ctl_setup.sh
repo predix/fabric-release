@@ -22,7 +22,6 @@ export JOB_DIR=$HOME/jobs/$JOB_NAME
 export LOG_DIR=$HOME/sys/log/$JOB_NAME
 export RUN_DIR=$HOME/sys/run/$JOB_NAME
 export STORE_DIR=$HOME/store/$JOB_NAME
-#export STORE_DIR=$HOME/data/$JOB_NAME
 export TMP_DIR=$HOME/sys/tmp/$JOB_NAME
 export TMPDIR=$TMP_DIR
 for dir in $LOG_DIR $RUN_DIR $STORE_DIR $TMP_DIR

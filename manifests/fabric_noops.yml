@@ -1,0 +1,42 @@
+---
+name: hyperledger-fabric-noops
+director_uuid: 28539132-6d43-4e1b-bf40-f2ce032ee9f8
+stemcells:
+- alias: default
+  name: bosh-warden-boshlite-ubuntu-trusty-go_agent
+  version: latest
+releases:
+- name: fabric-release
+  version: latest
+update:
+  canaries: 1
+  canary_watch_time: 5000-120000
+  max_in_flight: 3
+  serial: true
+  update_watch_time: 5000-120000
+jobs:
+- instances: 2
+  azs: [z1, z2]
+  name: peer
+  networks:
+  - name: peer2
+  persistent_disk: 1024
+  vm_type: small
+  stemcell: default
+  templates:
+  - name: peer
+    release: fabric-release
+  - name: docker
+    release: fabric-release
+properties:
+  peer:
+    consensus:
+      plugin: noops
+    security:
+      enabled: false
+    core:
+      data_path: /var/vcap/data/hyperledger/production
+  docker:
+    store:
+      dir: /var/vcap/data/docker
+

@@ -18,6 +18,7 @@ consumes:
     type: fabric_peers
   - name: membersrvc
     type: member_service
+    optional: true
 
 provides:
   - name: peers
@@ -35,6 +36,10 @@ properties:
   peer.core.discovery.root_node:
     description: "Root node of peer discovery"
     default: nil
+
+  peer.core.data_path:
+    description: "Path on the file system where peer will store data"
+    default: "/var/vcap/store/hyperledger/production"
 
   peer.consensus.plugin:
     description: "The consensus algorithm to use"
