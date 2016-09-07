@@ -31,10 +31,16 @@ This repository is BOSH release for [hyperledger fabric](https://github.com/hype
 	bosh update cloud-config manifests/cloud_config_boshlite.yml
 	```
 
+1. Update director_uuid field in manifests/fabric_permissionless.yml with uuid of local BOSH Director
+
+        ```
+        bosh status --uuid
+        ```
+
 1. Deploy release
 
 	```
-	bosh -d manifests/fabric.yml deploy
+	bosh -d manifests/fabric_permissionless.yml deploy
 	```
 
 ## Test
