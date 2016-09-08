@@ -33,9 +33,9 @@ This repository is BOSH release for [hyperledger fabric](https://github.com/hype
 
 1. Update director_uuid field in manifests/fabric_permissionless.yml with uuid of local BOSH Director
 
-        ```
-        bosh status --uuid
-        ```
+	```
+	bosh status --uuid
+	```
 
 1. Deploy release
 
