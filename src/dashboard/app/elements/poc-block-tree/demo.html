@@ -1,0 +1,56 @@
+<html>
+
+	<head>
+		<title>poc-block-tree demo</title>
+		<script src="../../bower_components/webcomponentsjs/webcomponents-lite.js"></script>
+		<link rel="import" href="poc-network-graph.html">
+		<link rel="import" href="poc-block-tree.html">
+	</head>
+
+	<body unresolved>
+
+		<h1>poc-network-graph</h1>
+		<poc-network-graph id="demo1" title="Test Element"></poc-network-graph>
+
+		<poc-network-graph id="demo3"></poc-network-graph>
+
+		<script type="text/javascript">
+			document.addEventListener('WebComponentsReady', function() {
+				var scope = document.querySelector('#demo1');
+				var Link = function(source, target, value) {
+					return {
+						source: source,
+						target: target,
+						value: value
+					}
+				};
+				var Node = function(n, g) {
+					return {
+						name: n,
+						group: g
+					};
+				};
+				scope.graph = {
+					"nodes": [
+						new Node('Network', 1),
+						new Node('node2', 2),
+						new Node('node3', 3),
+						new Node('node4', 4),
+						new Node('node5', 5)
+					],
+					"links": [
+					]
+				};
+				for (var i = 0; i < scope.graph.nodes.length; i++) {
+					var n = scope.graph.nodes[i];
+					var l = new Link(i, 0, 2);
+					console.log('Creating link', l);
+					scope.graph.links.push(l);
+				}
+			});
+		</script>
+		<h1>poc-block-tree</h1>
+		<poc-block-tree id="demo2" title="Test Element"></poc-block-tree>
+	</body>
+
+</html>
