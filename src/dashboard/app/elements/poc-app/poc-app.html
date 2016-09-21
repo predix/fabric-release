@@ -364,7 +364,7 @@ To use this component:
 				this.addTime(this.now);
 			},
 			refresh: function() {
-				this.notify('Fetching data...');
+				this.notify('Refreshing data...');
 				var self = this;
 				this.$.ajaxChain.generateRequest();
 				this.$.ajaxPeers.generateRequest();
@@ -485,29 +485,58 @@ To use this component:
 					}
 				};
 
-				function Node(n, g) {
+				function Node(n, g, c) {
 					return {
 						name: n,
-						group: g
+						group: g,
+						children: c
 					};
 				};
 
-				scope.nodes = [new Node('Network', 1)];
+				function getChildren(count, id){
+					var out = [];
+					for (var k = 0; k < count; k++) {
+						var l2 = new Link(k, id, 2);
+						console.log('Creating link', l2, l2.source);
+						out.push(l2);
+					}
+					return out;
+				}
+
+				//scope.nodes = [new Node('Network', 1)];
 				var peers = this.network.peers;
+				console.table(peers);
 				var peer;
+
 				for (var i = 0; i < peers.length; i++) {
 					peer = peers[i];
-					scope.nodes.push(new Node(peer.address, peer.ID.name, i + 1));
+					var children = getChildren(peers.length, peers.length - i);
+					var n = new Node(peer.address, peer.ID.name, i + 1, children);
+					scope.nodes.push(n);
+						console.log('Peer', peer, children, n);
+						console.table(peer);
 				}
 
 
 				for (var i = 0; i < scope.nodes.length; i++) {
 					var n = scope.nodes[i];
 					var l = new Link(i, 0, 2);
-					console.log('Creating link', l);
+
+					console.log('Creating link', i, l);
 					scope.links.push(l);
+					scope.links.push(new Link(i, 0, 2));
+					scope.links.push(new Link(i, 1, 2));
+					scope.links.push(new Link(i, 2, 2));
+					scope.links.push(new Link(i, 3, 2));
+				//	scope.links.push(new Link(i, 4, 2));
+
 				}
+				console.log('Nodes');
+				console.table(scope.nodes);
+				console.log('Links');
+				console.table(scope.links);
 				this.set('networkGraph', scope);
+				this.notify('Updating graph');
 			}
 		});
 	</script>
