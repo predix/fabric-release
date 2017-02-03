@@ -2,5 +2,5 @@
 name: peer
 
 files:
-  - peer/peer
-  - peer/fabric-src.tgz
+  - peer/peer-0_6_1
+  - peer/fabric-0.6.1-preview.tar.gz

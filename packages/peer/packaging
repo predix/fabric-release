@@ -6,8 +6,8 @@ mkdir -p ${BOSH_INSTALL_TARGET}/bin
 
 echo "Copying peer binary..."
 
-cp peer/peer ${BOSH_INSTALL_TARGET}/bin
+cp peer/peer-0_6_1 ${BOSH_INSTALL_TARGET}/bin/peer
 chmod 755 ${BOSH_INSTALL_TARGET}/bin/peer
 
 echo "Copying the fabric/peer source"
-cp peer/fabric-src.tgz ${BOSH_INSTALL_TARGET}/src
+cp peer/fabric-0.6.1-preview.tar.gz ${BOSH_INSTALL_TARGET}/src

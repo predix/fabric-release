@@ -2,4 +2,4 @@
 name: member_service
 
 files:
-  - member_service/membersrvc
+  - member_service/membersrvc-0_6_1

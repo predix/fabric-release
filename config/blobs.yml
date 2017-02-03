@@ -39,3 +39,15 @@ member_service/membersrvc:
   object_id: aa50a525-1239-482a-922e-76db83517a83
   sha: 6cedc2c8bac1e34e0d1f608f9542a704e279866f
   size: 20295948
+member_service/membersrvc-0_6_1:
+  object_id: f42a66a6-edcb-42fa-a164-5d573b917b04
+  sha: fc9612f264f4c1e6c59ca9cef48c1151749cd58b
+  size: 18705845
+peer/fabric-0.6.1-preview.tar.gz:
+  object_id: 6453a404-1340-4b7f-8fc1-e4df3ead0357
+  sha: 1f1a9891801f33107797a8f7b328ccaf61f26f8b
+  size: 12989380
+peer/peer-0_6_1:
+  object_id: d308a740-58c8-4df0-9bd8-6601b6a3cdce
+  sha: 1197ee0446fe518a03944173d2e737b285df69dd
+  size: 25173687

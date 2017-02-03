@@ -6,5 +6,5 @@ mkdir -p ${BOSH_INSTALL_TARGET}/bin
 
 echo "Copying member service binary..."
 
-cp member_service/membersrvc ${BOSH_INSTALL_TARGET}/bin
+cp member_service/membersrvc-0_6_1 ${BOSH_INSTALL_TARGET}/bin/membersrvc
 chmod 755 ${BOSH_INSTALL_TARGET}/bin/membersrvc
