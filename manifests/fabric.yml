@@ -1,6 +1,6 @@
 ---
 name: hyperledger-fabric
-director_uuid: 63ddb6a6-d6fe-40e1-b16b-2ff6b2034c79
+director_uuid: 28539132-6d43-4e1b-bf40-f2ce032ee9f8
 stemcells:
 - alias: default
   name: bosh-warden-boshlite-ubuntu-trusty-go_agent
@@ -63,13 +63,13 @@ properties:
     clients:
     - name: admin
       secret: Xurw3yU9zI0l
-      affiliation: institution_a 00001
-      affiliation_role:
+      affiliation: institution_a
+      affiliation_role: 00001
       metadata: '''{"registrar":{"roles":["client","peer","validator","auditor"],"delegateRoles":["client"]}}'''
     - name: WebAppAdmin
       secret: DJY27pEnl16d
-      affiliation: institution_a 00002
-      affiliation_role:
+      affiliation: institution_a
+      affiliation_role: 00002
       metadata: '''{"registrar":{"roles":["client"]}}'''
     - name: lukas
       secret: NPKYL39uKbkj
