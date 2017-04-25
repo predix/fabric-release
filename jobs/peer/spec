@@ -5,6 +5,7 @@ templates:
   core.yaml.erb: config/core.yaml
   config.yaml.erb: config/config.yaml
   pre-start.erb: bin/pre-start
+  post-deploy.erb: bin/post-deploy
 
 packages:
   - peer
@@ -52,6 +53,10 @@ properties:
   peer.security.enabled:
     description: "Is security enabled in block chain"
     default: false
+
+  peer.chaincode.baseimage_release:
+    description: "Hyperledger fabric docker base image version"
+    default: "0.0.11"
 
   membersrvc.validators:
     description: "Validators to be configured in ECA"

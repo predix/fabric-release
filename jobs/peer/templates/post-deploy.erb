@@ -1,0 +1,74 @@
+#!/bin/bash
+
+export PATH=$PATH:/var/vcap/packages/docker/bin
+
+NAME=hyperledger/fabric-baseimage
+RELEASE=`uname -m`-<%= p("peer.chaincode.baseimage_release") %>
+DOCKERHUB_NAME=$NAME:$RELEASE
+
+FABRIC_SRC_DIR="/var/vcap/packages/gopath/src/github.com/hyperledger/fabric/"
+
+docker inspect $DOCKERHUB_NAME 2>&1 > /dev/null
+if [ "$?" == "0" ]; then
+    echo "BUILD-CACHE: exists!"
+    BASENAME=$DOCKERHUB_NAME
+else
+    echo "BUILD-CACHE: Pulling \"$DOCKERHUB_NAME\" from dockerhub.."
+    docker pull $DOCKERHUB_NAME
+    docker inspect $DOCKERHUB_NAME 2>&1 > /dev/null
+    if [ "$?" == "0" ]; then
+	echo "BUILD-CACHE: Success!"
+	BASENAME=$DOCKERHUB_NAME
+    else
+	echo "BUILD-CACHE: WARNING - Build-cache unavailable, attempting local build"
+	(cd $FABRIC_SRC_DIR/images/base && make docker DOCKER_TAG=localbuild)
+	if [ "$?" != "0" ]; then
+            echo "ERROR: Build-cache could not be compiled locally"
+            exit -1
+	fi
+	BASENAME=$NAME:localbuild
+    fi
+fi
+
+# Ensure that we have the baseimage we are expecting
+docker inspect $BASENAME 2>&1 > /dev/null
+if [ "$?" != "0" ]; then
+   echo "ERROR: Unable to obtain a baseimage"
+   exit -1
+fi
+
+# any further errors should be fatal
+set -e
+
+TMP=`mktemp -d`
+DOCKERFILE=$TMP/Dockerfile
+
+LOCALSCRIPTS=$TMP/scripts
+REMOTESCRIPTS=/hyperledger/scripts/provision
+
+mkdir -p $LOCALSCRIPTS
+cp -R $FABRIC_SRC_DIR/scripts/provision/* $LOCALSCRIPTS
+
+# extract the FQN environment and run our common.sh to create the :latest tag
+cat <<EOF > $DOCKERFILE
+FROM $BASENAME
+`for i in \`docker run -i $BASENAME /bin/bash -l -c printenv\`;
+do
+   echo ENV $i
+done`
+COPY scripts $REMOTESCRIPTS
+RUN $REMOTESCRIPTS/common.sh
+RUN chmod a+rw -R /opt/gopath
+
+EOF
+
+[ ! -z "$http_proxy" ] && DOCKER_ARGS_PROXY="$DOCKER_ARGS_PROXY --build-arg http_proxy=$http_proxy"
+[ ! -z "$https_proxy" ] && DOCKER_ARGS_PROXY="$DOCKER_ARGS_PROXY --build-arg https_proxy=$https_proxy"
+[ ! -z "$HTTP_PROXY" ] && DOCKER_ARGS_PROXY="$DOCKER_ARGS_PROXY --build-arg HTTP_PROXY=$HTTP_PROXY"
+[ ! -z "$HTTPS_PROXY" ] && DOCKER_ARGS_PROXY="$DOCKER_ARGS_PROXY --build-arg HTTPS_PROXY=$HTTPS_PROXY"
+[ ! -z "$no_proxy" ] && DOCKER_ARGS_PROXY="$DOCKER_ARGS_PROXY --build-arg no_proxy=$no_proxy"
+[ ! -z "$NO_PROXY" ] && DOCKER_ARGS_PROXY="$DOCKER_ARGS_PROXY --build-arg NO_PROXY=$NO_PROXY"
+docker build $DOCKER_ARGS_PROXY -t $NAME:latest $TMP
+
+rm -rf $TMP
+
