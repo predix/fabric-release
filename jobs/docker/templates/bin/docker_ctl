@@ -82,18 +82,20 @@ case $1 in
 
   stop)
     # Stop Docker containers
-    echo "Stopping docker containers..."
-    containers="$(/var/vcap/packages/docker/bin/docker --host unix://${DOCKER_PID_DIR}/docker.sock ps -q)"
+    echo "Stopping docker containers..." >>${DOCKER_LOG_DIR}/${OUTPUT_LABEL}.stdout.log
+    containers="$(/var/vcap/packages/docker/bin/docker ps -q)"
     if [[ ! -z $containers ]]; then
       for container in $containers
       do
-        echo "Stopping docker container ${container}"
-        /var/vcap/packages/docker/bin/docker --host unix://${DOCKER_PID_DIR}/docker.sock stop ${container}
+        echo "Stopping docker container ${container}" >>${DOCKER_LOG_DIR}/${OUTPUT_LABEL}.stdout.log
+        /var/vcap/packages/docker/bin/docker stop ${container} >>${DOCKER_LOG_DIR}/${OUTPUT_LABEL}.stdout.log \
+        2>>${DOCKER_LOG_DIR}/${OUTPUT_LABEL}.stderr.log
       done
     fi
 
     # Stop Docker daemon
-    echo -n "Stopping docker daemon..."
+    echo -n "Stopping docker daemon..." >>${DOCKER_LOG_DIR}/${OUTPUT_LABEL}.stdout.log \
+        2>>${DOCKER_LOG_DIR}/${OUTPUT_LABEL}.stderr.log
     kill_and_wait ${DOCKER_PID_FILE}
     ;;
 

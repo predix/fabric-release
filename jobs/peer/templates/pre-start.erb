@@ -11,12 +11,14 @@ echo "Installed git successfully"
 echo "Copying hyperledger/fabric code to GOPATH"
 export GOROOT=/var/vcap/packages/golang
 export GOPATH=/var/vcap/packages/gopath
-mkdir -p $GOPATH/src/github.com/hyperledger/fabric
-FABRIC_SRC=$GOPATH/src/github.com/hyperledger/fabric
-mkdir ${GOPATH}/tmp
+FABRIC_SRC=${GOPATH}/src/github.com/hyperledger/fabric
+mkdir -p ${FABRIC_SRC}
 TMP_SRC=${GOPATH}/tmp
-tar zxf /var/vcap/packages/peer/src/fabric-0.6.1-preview.tar.gz -C ${TMP_SRC}
-cd ${TMP_SRC}/fabric-0.6.1-preview
-cp -R . ${FABRIC_SRC}
+if [ ! -d "$TMP_SRC" ]; then
+  mkdir -p ${GOPATH}/tmp
+  tar zxf /var/vcap/packages/peer/src/fabric-0.6.1-preview.tar.gz -C ${TMP_SRC}
+  cd ${TMP_SRC}/fabric-0.6.1-preview
+  cp -R . ${FABRIC_SRC}
+fi
 
 echo "Done copying hyperledger/fabric code to GOPATH"
