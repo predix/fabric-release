@@ -437,9 +437,9 @@ security:
     # the chaincode using the metadata field of the transaction (requires
     # security to be enabled).
     attributes:
-      enabled: false
+      enabled: <%= p("peer.security.attributes.enabled") %>
     multithreading:
-      enabled: false
+      enabled: <%= p("peer.security.multithreading.enabled") %>
 
     # Confidentiality protocol versions supported: 1.2
     confidentialityProtocolVersion: 1.2

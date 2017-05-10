@@ -54,6 +54,14 @@ properties:
     description: "Is security enabled in block chain"
     default: false
 
+  peer.security.attributes.enabled:
+    description: "Is attribute access enabled in block chain"
+    default: false
+
+  peer.security.multithreading.enabled:
+    description: "Is multithreading enabled in block chain"
+    default: false
+
   peer.chaincode.baseimage_release:
     description: "Hyperledger fabric docker base image version"
     default: "0.0.11"
