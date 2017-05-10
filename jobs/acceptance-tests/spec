@@ -82,3 +82,7 @@ properties:
   acceptance_test.skip_deploy:
     description: "Boolean indicating whether deploy chaincode test should be skipped"
     default: false
+
+  acceptance_test.use_new_user:
+    description: "Boolean indicating whether acceptance test should register a new user"
+    default: true

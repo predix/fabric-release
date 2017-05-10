@@ -25,6 +25,7 @@ module.exports = {
   chaincodeID:            "<%= p("acceptance_test.chaincode_id") %>",
   chaincodeSetArgs:       <%= set_args %>,
   skipDeploy:             <%= p("acceptance_test.skip_deploy") %>,
+  useNewUser:             <%= p("acceptance_test.use_new_user") %>,
   <% if_p("acceptance_test.vault_url") do |vault_url| %>
   vaultUrl:               "<%= vault_url %>",
   <% end %>

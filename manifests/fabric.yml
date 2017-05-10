@@ -44,7 +44,6 @@ jobs:
   name: acceptance_test
   networks:
   - name: peer
-  persistent_disk: 1024
   vm_type: small
   stemcell: default
   lifecycle: errand
@@ -54,12 +53,12 @@ jobs:
   properties:
     acceptance_test:
       skip_deploy: false
+      use_new_user: true
 - instances: 1
   azs: [z2]
   name: smoke_test
   networks:
   - name: peer
-  persistent_disk: 1024
   vm_type: small
   stemcell: default
   lifecycle: errand
@@ -69,12 +68,13 @@ jobs:
   properties:
     acceptance_test:
       skip_deploy: true
+      use_new_user: false
 properties:
   acceptance_test:
     registrar_name: WebAppAdmin
     registrar_password: DJY27pEnl16d
-    username: diego
-    password: DRJ23pEQl16a
+    username: binhn
+    password: 7avZQLwcUe9q
   peer:
     consensus:
       plugin: pbft
