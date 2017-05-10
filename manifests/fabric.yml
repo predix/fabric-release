@@ -25,7 +25,7 @@ jobs:
   stemcell: default
   templates:
   - name: member_service
-    release: fabric-release 
+    release: fabric-release
 - instances: 3
   azs: [z1, z2]
   name: peer
@@ -39,12 +39,49 @@ jobs:
     release: fabric-release
   - name: docker
     release: fabric-release
+- instances: 1
+  azs: [z2]
+  name: acceptance_test
+  networks:
+  - name: peer
+  persistent_disk: 1024
+  vm_type: small
+  stemcell: default
+  lifecycle: errand
+  templates:
+  - name: acceptance-tests
+    release: fabric-release
+  properties:
+    acceptance_test:
+      skip_deploy: false
+- instances: 1
+  azs: [z2]
+  name: smoke_test
+  networks:
+  - name: peer
+  persistent_disk: 1024
+  vm_type: small
+  stemcell: default
+  lifecycle: errand
+  templates:
+  - name: acceptance-tests
+    release: fabric-release
+  properties:
+    acceptance_test:
+      skip_deploy: true
 properties:
+  acceptance_test:
+    registrar_name: WebAppAdmin
+    registrar_password: DJY27pEnl16d
+    username: diego
+    password: DRJ23pEQl16a
   peer:
     consensus:
       plugin: pbft
     security:
       enabled: true
+      attributes:
+        enabled: true
     core:
       data_path: /var/vcap/data/hyperledger/production
   docker:

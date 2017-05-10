@@ -1,0 +1,34 @@
+<%
+   init_args = p("acceptance_test.chaincode_init_args").to_json
+   query_args = p("acceptance_test.chaincode_query_args").to_json
+   invoke_args = p("acceptance_test.chaincode_invoke_args").to_json
+   set_args = p("acceptance_test.chaincode_set_args").to_json
+   peer_addrs = link("peers").instances.map{|instance| instance.address}.join(":30303,") + ":30303"
+   ca_addr = link("membersrvc").instances.map{|instance| instance.address}.join(":50051,") + ":50051"
+%>
+module.exports = {
+  blockchainName:         "<%= p("acceptance_test.blockchain_name") %>",
+  peers:                  "<%= peer_addrs %>",
+  ca:                     "<%= ca_addr %>",
+  registrarUserName:      "<%= p("acceptance_test.registrar_name") %>",
+  registrarPassword:      "<%= p("acceptance_test.registrar_password") %>",
+  userName:               "<%= p("acceptance_test.username") %>",
+  password:               "<%= p("acceptance_test.password") %>",
+  chaincodePath:          "<%= p("acceptance_test.chaincode_path") %>",
+  chaincodeInitArgs:      <%= init_args %>,
+  chaincodeQueryArgs:     <%= query_args %>,
+  chaincodeQueryResult:   "<%= p("acceptance_test.chaincode_query_result") %>",
+  chaincodeInvokeArgs:    <%= invoke_args %>,
+  chaincodeInvokeResult:  "<%= p("acceptance_test.chaincode_invoke_result") %>",
+  keyValueLocation:       "<%= p("acceptance_test.key_vaule_store_location") %>",
+  newUserAffiliation:     "<%= p("acceptance_test.user_affiliation") %>",
+  chaincodeID:            "<%= p("acceptance_test.chaincode_id") %>",
+  chaincodeSetArgs:       <%= set_args %>,
+  skipDeploy:             <%= p("acceptance_test.skip_deploy") %>,
+  <% if_p("acceptance_test.vault_url") do |vault_url| %>
+  vaultUrl:               "<%= vault_url %>",
+  <% end %>
+  <% if_p("acceptance_test.vault_token") do |vault_token| %>
+  vaultToken:             "<%= vault_token %>"
+  <% end %>
+}

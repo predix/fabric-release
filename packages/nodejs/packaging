@@ -1,0 +1,4 @@
+# abort script on any command that exits with a non zero value
+set -e -x
+tar xf nodejs/node-v6.10.2-linux-x64.tar.xz
+cp -R node-v6.10.2-linux-x64/* ${BOSH_INSTALL_TARGET}

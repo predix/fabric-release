@@ -1,0 +1,14 @@
+# abort script on any command that exits with a non zero value
+set -e -x
+
+mkdir -p ${BOSH_INSTALL_TARGET}/src
+echo "Copying acceptance test code..."
+cp -a acceptance-tests/* ${BOSH_INSTALL_TARGET}/src
+
+mkdir -p ${BOSH_INSTALL_TARGET}/chaincode/src
+echo "Copying chaincode example..."
+cp chaincode/chaincode_example01.tgz ${BOSH_INSTALL_TARGET}/chaincode/src
+
+mkdir -p ${BOSH_INSTALL_TARGET}/hyperledger/src
+echo "Copying hyperledger code..."
+cp peer/fabric-0.6.1-preview.tar.gz ${BOSH_INSTALL_TARGET}/hyperledger/src

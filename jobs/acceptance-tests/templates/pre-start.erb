@@ -1,0 +1,34 @@
+#!/bin/bash -e
+
+echo "Updating apt-get"
+apt-get update
+
+echo "Installing git"
+apt-get -y install git
+echo "Installed git successfully"
+
+export GOPATH=/var/vcap/packages/acceptance-tests/chaincode
+CHAINCODE_PATH=${GOPATH}/src/<%= p("acceptance_test.chaincode_path") %>
+if [ ! -d "${CHAINCODE_PATH}" ]; then
+  echo "Extracting chaincode..."
+  cd $GOPATH/src
+  tar xf chaincode_example01.tgz
+  cd ${CHAINCODE_PATH}
+  echo "Extracting hyperledger code in vendor directory of chaincode..."
+  TMP_SRC=${GOPATH}/tmp
+  mkdir -p ${TMP_SRC}
+  tar xf /var/vcap/packages/acceptance-tests/hyperledger/src/fabric-0.6.1-preview.tar.gz -C ${TMP_SRC}
+  FABRIC_SRC=${CHAINCODE_PATH}/vendor/github.com/hyperledger/fabric
+  mkdir -p ${FABRIC_SRC}
+  cd ${TMP_SRC}/fabric-0.6.1-preview
+  cp -R . ${FABRIC_SRC}
+  echo "Done setting up chaincode"
+fi
+
+echo "Create key value store location"
+mkdir -p <%= p("acceptance_test.key_vaule_store_location") %>
+
+echo "NPM install dependencies for acceptance tests"
+export PATH=$PATH:/var/vcap/packages/nodejs/bin
+cd /var/vcap/packages/acceptance-tests/src
+npm install

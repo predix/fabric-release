@@ -1,0 +1,12 @@
+#!/bin/bash -l
+
+set -e -x
+
+echo "Copying config file"
+cp /var/vcap/jobs/acceptance-tests/config/config.js /var/vcap/packages/acceptance-tests/src/specs/config
+
+echo "Running tests"
+export GOPATH=/var/vcap/packages/acceptance-tests/chaincode
+export PATH=$PATH:/var/vcap/packages/nodejs/bin
+cd /var/vcap/packages/acceptance-tests/src
+npm test

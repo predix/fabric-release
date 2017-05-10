@@ -51,3 +51,11 @@ peer/peer-0_6_1:
   object_id: d308a740-58c8-4df0-9bd8-6601b6a3cdce
   sha: 1197ee0446fe518a03944173d2e737b285df69dd
   size: 25173687
+chaincode/chaincode_example01.tgz:
+  object_id: b48b5b0b-b1bc-4af6-b7f5-a02e55000a15
+  sha: e31c20c0bad1ecd9ad3d967da70c52e3d3f219b8
+  size: 1261
+nodejs/node-v6.10.2-linux-x64.tar.xz:
+  object_id: 7f0e4866-1af2-4fe0-98cd-f60c6dcfde69
+  sha: cdcc5a811472f5cd8b4eac0e019b43133d0f668c
+  size: 9366128

@@ -1,0 +1,84 @@
+---
+name: acceptance-tests
+templates:
+  run.erb: bin/run
+  pre-start.erb: bin/pre-start
+  config.js.erb: config/config.js
+
+packages:
+  - nodejs
+  - acceptance-tests
+
+consumes:
+  - name: peers
+    type: fabric_peers
+  - name: membersrvc
+    type: member_service
+    optional: true
+
+properties:
+  acceptance_test.blockchain_name:
+    description: "Name of the blockchain to be used by hfc"
+    default: "predix-blockchain"
+
+  acceptance_test.registrar_name:
+    description: "Registrar username to be used in acceptance test"
+
+  acceptance_test.registrar_password:
+    description: "Registrar password to be used in acceptance test"
+
+  acceptance_test.username:
+    description: "Username to be used for enrollment in acceptance test"
+
+  acceptance_test.password:
+    description: "Password of the user to be used for enrollment in acceptance test"
+
+  acceptance_test.chaincode_path:
+    description: "Path to chaincode to be deployed by acceptance test"
+    default: "github.com/predix/chaincode_example/chaincode_example01"
+
+  acceptance_test.chaincode_init_args:
+    description: "Args to be passed during chaincode deployment by acceptance test"
+    default: ["test1", "1800", "test2", "2000"]
+
+  acceptance_test.chaincode_query_args:
+    description: "Args to be passed during query operation by acceptance test"
+    default: ["test1"]
+
+  acceptance_test.chaincode_query_result:
+    description: "Result of query operation"
+    default: "1800"
+
+  acceptance_test.chaincode_invoke_args:
+    description: "Args to be passed during invoke operation by acceptance test"
+    default:  ["test1", "test2", "10"]
+
+  acceptance_test.chaincode_invoke_result:
+    description: "Result of invoke operation"
+    default: "1780"
+
+  acceptance_test.key_vaule_store_location:
+    description: "Path to directory where ecerts can be stored"
+    default: "/var/vcap/data/acceptance-tests/keyvalueStore"
+
+  acceptance_test.vault_url:
+    description: "URL of Vault service instance"
+
+  acceptance_test.vault_token:
+    description: "Vault token to be used to access vault instance"
+
+  acceptance_test.user_affiliation:
+    description: "Affiliation to be used for registering new user"
+    default: "institution_a"
+
+  acceptance_test.chaincode_id:
+    description: "ID of the chaincode being deployed"
+    default: "0b830c05cb145309ddea47ebef1c737e5b0206bdefccd7765cf5712c14ef39aa"
+
+  acceptance_test.chaincode_set_args:
+    description: "Args to be passed during set invoke operation by acceptance test"
+    default: ["test1", "1800", "test2", "2000"]
+
+  acceptance_test.skip_deploy:
+    description: "Boolean indicating whether deploy chaincode test should be skipped"
+    default: false
