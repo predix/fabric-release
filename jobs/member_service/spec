@@ -25,3 +25,6 @@ properties:
     description: "Auditors to be configured in ECA"
   membersrvc.affiliations:
     description: "Affiliations for pre key tree"
+  membersrvc.aca.enabled:
+    description: "Is ACA enabled in block chain"
+    default: false

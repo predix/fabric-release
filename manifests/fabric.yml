@@ -88,6 +88,8 @@ properties:
     store:
       dir: /var/vcap/data/docker
   membersrvc:
+    aca:
+      enabled: true
     affiliations:
       banks_and_institutions:
         banks:

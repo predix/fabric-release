@@ -146,7 +146,7 @@ aca:
           address: <%= spec.address %>:50051
           server-name: acap
           # Enabling/disabling Attribute Certificate Authority, if ACA is enabled attributes will be added into the TCert.
-          enabled: false
+          enabled: <%= p("membersrvc.aca.enabled") %>
 pki:
           ca:
                  subject:
