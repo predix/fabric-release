@@ -33,29 +33,49 @@ properties:
   acceptance_test.password:
     description: "Password of the user to be used for enrollment in acceptance test"
 
-  acceptance_test.chaincode_path:
+  acceptance_test.regular.chaincode_path:
     description: "Path to chaincode to be deployed by acceptance test"
     default: "github.com/predix/chaincode_example/chaincode_example01"
 
-  acceptance_test.chaincode_init_args:
+  acceptance_test.regular.chaincode_init_args:
     description: "Args to be passed during chaincode deployment by acceptance test"
     default: ["test1", "1800", "test2", "2000"]
 
-  acceptance_test.chaincode_query_args:
+  acceptance_test.regular.chaincode_query_args:
     description: "Args to be passed during query operation by acceptance test"
     default: ["test1"]
 
-  acceptance_test.chaincode_query_result:
+  acceptance_test.regular.chaincode_query_result:
     description: "Result of query operation"
     default: "1800"
 
-  acceptance_test.chaincode_invoke_args:
+  acceptance_test.regular.chaincode_query_function:
+    description: "Function name of query"
+    default: "query"
+
+  acceptance_test.regular.chaincode_invoke_args:
     description: "Args to be passed during invoke operation by acceptance test"
     default:  ["test1", "test2", "10"]
 
-  acceptance_test.chaincode_invoke_result:
+  acceptance_test.regular.chaincode_invoke_result:
     description: "Result of invoke operation"
     default: "1780"
+
+  acceptance_test.regular.chaincode_invoke_function:
+    description: "Function name of invoke"
+    default: "invoke"
+
+  acceptance_test.regular.chaincode_id:
+    description: "ID of the chaincode being deployed"
+    default: "0b830c05cb145309ddea47ebef1c737e5b0206bdefccd7765cf5712c14ef39aa"
+
+  acceptance_test.regular.chaincode_set_args:
+    description: "Args to be passed during set invoke operation by acceptance test"
+    default: ["test1", "1800", "test2", "2000"]
+
+  acceptance_test.regular.chaincode_set_function:
+    description: "Function name of set"
+    default: "set"
 
   acceptance_test.key_vaule_store_location:
     description: "Path to directory where ecerts can be stored"
@@ -71,14 +91,6 @@ properties:
     description: "Affiliation to be used for registering new user"
     default: "institution_a"
 
-  acceptance_test.chaincode_id:
-    description: "ID of the chaincode being deployed"
-    default: "0b830c05cb145309ddea47ebef1c737e5b0206bdefccd7765cf5712c14ef39aa"
-
-  acceptance_test.chaincode_set_args:
-    description: "Args to be passed during set invoke operation by acceptance test"
-    default: ["test1", "1800", "test2", "2000"]
-
   acceptance_test.skip_deploy:
     description: "Boolean indicating whether deploy chaincode test should be skipped"
     default: false
@@ -86,3 +98,47 @@ properties:
   acceptance_test.use_new_user:
     description: "Boolean indicating whether acceptance test should register a new user"
     default: true
+
+  acceptance_test.aca.chaincode_path:
+    description: "Path to aca chaincode to be deployed by acceptance test"
+    default: "github.com/predix/chaincode_example/authorizable_counter"
+
+  acceptance_test.aca.chaincode_init_args:
+    description: "Args to be passed during aca chaincode deployment by acceptance test"
+    default: ["position", "admin"]
+
+  acceptance_test.aca.chaincode_query_args:
+    description: "Args to be passed during query operation by acceptance test"
+    default: []
+
+  acceptance_test.aca.chaincode_query_result:
+    description: "Result of query operation"
+    default: "0"
+
+  acceptance_test.aca.chaincode_query_function:
+    description: "Function name of query"
+    default: "read"
+
+  acceptance_test.aca.chaincode_invoke_args:
+    description: "Args to be passed during invoke operation by acceptance test"
+    default:  []
+
+  acceptance_test.aca.chaincode_invoke_result:
+    description: "Result of invoke operation"
+    default: "1"
+
+  acceptance_test.aca.chaincode_invoke_function:
+    description: "Function name of invoke"
+    default: "increment"
+
+  acceptance_test.aca.chaincode_id:
+    description: "ID of the chaincode being deployed"
+    default: "975529afbf3bc2a12b57d0eaa2b630d535ebc0ac0af449808b16b9f431626df6"
+
+  acceptance_test.aca.chaincode_set_args:
+    description: "Args to be passed during set invoke operation by acceptance test"
+    default: []
+
+  acceptance_test.aca.chaincode_set_function:
+    description: "Function name of set"
+    default: "reset"

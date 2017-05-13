@@ -8,20 +8,25 @@ apt-get -y install git
 echo "Installed git successfully"
 
 export GOPATH=/var/vcap/packages/acceptance-tests/chaincode
-CHAINCODE_PATH=${GOPATH}/src/<%= p("acceptance_test.chaincode_path") %>
+CHAINCODE_PATH=${GOPATH}/src/<%= p("acceptance_test.regular.chaincode_path") %>
+ACA_CHAINCODE_PATH=${GOPATH}/src/<%= p("acceptance_test.aca.chaincode_path") %>
 if [ ! -d "${CHAINCODE_PATH}" ]; then
   echo "Extracting chaincode..."
   cd $GOPATH/src
-  tar xf chaincode_example01.tgz
-  cd ${CHAINCODE_PATH}
+  tar xf chaincode_example.tgz
   echo "Extracting hyperledger code in vendor directory of chaincode..."
   TMP_SRC=${GOPATH}/tmp
   mkdir -p ${TMP_SRC}
   tar xf /var/vcap/packages/acceptance-tests/hyperledger/src/fabric-0.6.1-preview.tar.gz -C ${TMP_SRC}
+  cd ${TMP_SRC}/fabric-0.6.1-preview
+  echo "Vendor in hyperledger code to regular chaincode"
   FABRIC_SRC=${CHAINCODE_PATH}/vendor/github.com/hyperledger/fabric
   mkdir -p ${FABRIC_SRC}
-  cd ${TMP_SRC}/fabric-0.6.1-preview
   cp -R . ${FABRIC_SRC}
+  echo "Vendor in hyperledger code to aca chaincode"
+  ACA_FABRIC_SRC=${ACA_CHAINCODE_PATH}/vendor/github.com/hyperledger/fabric
+  mkdir -p ${ACA_FABRIC_SRC}
+  cp -R . ${ACA_FABRIC_SRC}
   echo "Done setting up chaincode"
 fi
 

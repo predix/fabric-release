@@ -59,3 +59,7 @@ nodejs/node-v6.10.2-linux-x64.tar.xz:
   object_id: 7f0e4866-1af2-4fe0-98cd-f60c6dcfde69
   sha: cdcc5a811472f5cd8b4eac0e019b43133d0f668c
   size: 9366128
+chaincode/chaincode_example.tgz:
+  object_id: 9e760b0c-a792-48fd-9e1e-a4a93409b3d4
+  sha: 5de446b0f596059450c1a7fd10fa95621c51e574
+  size: 2110

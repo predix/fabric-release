@@ -3,5 +3,5 @@ name: acceptance-tests
 
 files:
   - acceptance-tests/**/*
-  - chaincode/chaincode_example01.tgz
+  - chaincode/chaincode_example.tgz
   - peer/fabric-0.6.1-preview.tar.gz

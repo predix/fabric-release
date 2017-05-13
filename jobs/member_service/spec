@@ -13,6 +13,8 @@ packages:
 provides:
   - name: membersrvc
     type: member_service
+    properties:
+    - membersrvc.aca.enabled
 
 properties:
   membersrvc.validators:

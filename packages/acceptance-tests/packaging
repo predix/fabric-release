@@ -7,7 +7,7 @@ cp -a acceptance-tests/* ${BOSH_INSTALL_TARGET}/src
 
 mkdir -p ${BOSH_INSTALL_TARGET}/chaincode/src
 echo "Copying chaincode example..."
-cp chaincode/chaincode_example01.tgz ${BOSH_INSTALL_TARGET}/chaincode/src
+cp chaincode/chaincode_example.tgz ${BOSH_INSTALL_TARGET}/chaincode/src
 
 mkdir -p ${BOSH_INSTALL_TARGET}/hyperledger/src
 echo "Copying hyperledger code..."

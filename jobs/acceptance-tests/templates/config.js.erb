@@ -1,8 +1,12 @@
 <%
-   init_args = p("acceptance_test.chaincode_init_args").to_json
-   query_args = p("acceptance_test.chaincode_query_args").to_json
-   invoke_args = p("acceptance_test.chaincode_invoke_args").to_json
-   set_args = p("acceptance_test.chaincode_set_args").to_json
+   init_args = p("acceptance_test.regular.chaincode_init_args").to_json
+   query_args = p("acceptance_test.regular.chaincode_query_args").to_json
+   invoke_args = p("acceptance_test.regular.chaincode_invoke_args").to_json
+   set_args = p("acceptance_test.regular.chaincode_set_args").to_json
+   aca_init_args = p("acceptance_test.aca.chaincode_init_args").to_json
+   aca_query_args = p("acceptance_test.aca.chaincode_query_args").to_json
+   aca_invoke_args = p("acceptance_test.aca.chaincode_invoke_args").to_json
+   aca_set_args = p("acceptance_test.aca.chaincode_set_args").to_json
    peer_addrs = link("peers").instances.map{|instance| instance.address}.join(":30303,") + ":30303"
    ca_addr = link("membersrvc").instances.map{|instance| instance.address}.join(":50051,") + ":50051"
 %>
@@ -14,18 +18,37 @@ module.exports = {
   registrarPassword:      "<%= p("acceptance_test.registrar_password") %>",
   userName:               "<%= p("acceptance_test.username") %>",
   password:               "<%= p("acceptance_test.password") %>",
-  chaincodePath:          "<%= p("acceptance_test.chaincode_path") %>",
-  chaincodeInitArgs:      <%= init_args %>,
-  chaincodeQueryArgs:     <%= query_args %>,
-  chaincodeQueryResult:   "<%= p("acceptance_test.chaincode_query_result") %>",
-  chaincodeInvokeArgs:    <%= invoke_args %>,
-  chaincodeInvokeResult:  "<%= p("acceptance_test.chaincode_invoke_result") %>",
-  keyValueLocation:       "<%= p("acceptance_test.key_vaule_store_location") %>",
+  regularChaincode:       {
+    chaincodePath:          "<%= p("acceptance_test.regular.chaincode_path") %>",
+    chaincodeInitArgs:      <%= init_args %>,
+    chaincodeQueryArgs:     <%= query_args %>,
+    chaincodeQueryResult:   "<%= p("acceptance_test.regular.chaincode_query_result") %>",
+    chaincodeQueryFn:       "<%= p("acceptance_test.regular.chaincode_query_function") %>",
+    chaincodeInvokeArgs:    <%= invoke_args %>,
+    chaincodeInvokeResult:  "<%= p("acceptance_test.regular.chaincode_invoke_result") %>",
+    chaincodeInvokeFn:      "<%= p("acceptance_test.regular.chaincode_invoke_function") %>",
+    chaincodeID:            "<%= p("acceptance_test.regular.chaincode_id") %>",
+    chaincodeSetArgs:       <%= set_args %>,
+    chaincodeSetFn:         "<%= p("acceptance_test.regular.chaincode_set_function") %>"
+  },
   newUserAffiliation:     "<%= p("acceptance_test.user_affiliation") %>",
-  chaincodeID:            "<%= p("acceptance_test.chaincode_id") %>",
-  chaincodeSetArgs:       <%= set_args %>,
   skipDeploy:             <%= p("acceptance_test.skip_deploy") %>,
   useNewUser:             <%= p("acceptance_test.use_new_user") %>,
+  acaEnabled:             <%= link("membersrvc").p("membersrvc.aca.enabled") %>,
+  acaChaincode:       {
+    chaincodePath:          "<%= p("acceptance_test.aca.chaincode_path") %>",
+    chaincodeInitArgs:      <%= aca_init_args %>,
+    chaincodeQueryArgs:     <%= aca_query_args %>,
+    chaincodeQueryResult:   "<%= p("acceptance_test.aca.chaincode_query_result") %>",
+    chaincodeQueryFn:       "<%= p("acceptance_test.aca.chaincode_query_function") %>",
+    chaincodeInvokeArgs:    <%= aca_invoke_args %>,
+    chaincodeInvokeResult:  "<%= p("acceptance_test.aca.chaincode_invoke_result") %>",
+    chaincodeInvokeFn:      "<%= p("acceptance_test.aca.chaincode_invoke_function") %>",
+    chaincodeID:            "<%= p("acceptance_test.aca.chaincode_id") %>",
+    chaincodeSetArgs:       <%= aca_set_args %>,
+    chaincodeSetFn:         "<%= p("acceptance_test.aca.chaincode_set_function") %>"
+  },
+  keyValueLocation:       "<%= p("acceptance_test.key_vaule_store_location") %>",
   <% if_p("acceptance_test.vault_url") do |vault_url| %>
   vaultUrl:               "<%= vault_url %>",
   <% end %>

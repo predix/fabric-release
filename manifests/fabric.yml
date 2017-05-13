@@ -109,7 +109,7 @@ properties:
       secret: DJY27pEnl16d
       affiliation: institution_a
       affiliation_role:
-      metadata: '''{"registrar":{"roles":["client"]}}'''
+      metadata: '''{"registrar":{"roles":["client"],"delegateRoles":["client"]}}'''
     - name: lukas
       secret: NPKYL39uKbkj
       affiliation: bank_a
