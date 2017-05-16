@@ -133,7 +133,7 @@ properties:
 
   acceptance_test.aca.chaincode_id:
     description: "ID of the chaincode being deployed"
-    default: "975529afbf3bc2a12b57d0eaa2b630d535ebc0ac0af449808b16b9f431626df6"
+    default: "2b30b245cabd7bdac6e3ddce0d73cc1e2ecfec4fc2f4e366918e73c76faad47a"
 
   acceptance_test.aca.chaincode_set_args:
     description: "Args to be passed during set invoke operation by acceptance test"
