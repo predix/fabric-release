@@ -48,7 +48,7 @@ properties:
 
   peer.maxNodes:
     description: "Maxnodes for validators and replicas"
-    default: 4
+    default: 7
 
   peer.network.id:
     description: "Network ID of the block chain network"
