@@ -17,6 +17,7 @@ This repository is BOSH release for [hyperledger fabric](https://github.com/hype
 	cd ~/workspace
 	git clone https://github.com/atulkc/fabric-release.git
 	cd fabric-release/
+	git submodule update --init
 	```
 
 1. Run following command to build and upload bosh release
