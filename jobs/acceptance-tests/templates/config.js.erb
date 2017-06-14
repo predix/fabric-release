@@ -8,11 +8,13 @@
    aca_invoke_args = p("acceptance_test.aca.chaincode_invoke_args").to_json
    aca_set_args = p("acceptance_test.aca.chaincode_set_args").to_json
    peer_addrs = link("peers").instances.map{|instance| instance.address}.join(":30303,") + ":30303"
+   eventhub_addrs = link("peers").instances.map{|instance| instance.address}.join(":31315,") + ":31315"
    ca_addr = link("membersrvc").instances.map{|instance| instance.address}.join(":50051,") + ":50051"
 %>
 module.exports = {
   blockchainName:         "<%= p("acceptance_test.blockchain_name") %>",
   peers:                  "<%= peer_addrs %>",
+  eventhub:               "<%= eventhub_addrs %>",
   ca:                     "<%= ca_addr %>",
   registrarUserName:      "<%= p("acceptance_test.registrar_name") %>",
   registrarPassword:      "<%= p("acceptance_test.registrar_password") %>",
