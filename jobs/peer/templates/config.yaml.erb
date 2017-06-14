@@ -17,8 +17,14 @@ general:
     # Keep the "N" in quotes, or it will be interpreted as "false".
     "N": <%= link("peers").instances.length %>
 
+    <%
+    bzt_nodes = (link("peers").instances.length - 1)/3
+    if bzt_nodes == 0
+        bzt_nodes = 1
+    end
+    %>
     # Number of byzantine nodes we will tolerate
-    f: 1
+    f: <%= bzt_nodes %>
 
     # Checkpoint period is the maximum number of pbft requests that must be
     # re-processed in a view change. A smaller checkpoint period will decrease
