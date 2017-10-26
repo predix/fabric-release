@@ -3,4 +3,4 @@ final_name: fabric-release
 blobstore:
   provider: s3
   options:
-    bucket_name: hyperledger-fabric
+    bucket_name: ge-hyperledger-fabric
